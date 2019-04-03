@@ -8,4 +8,4 @@ const guestSchema = new mongoose.Schema({
   dishes: [],
 });
 
-module.exports = mongoose.model('Guest', guestSchema, 'Guest');
+module.exports = mongoose.model('Guest', guestSchema);

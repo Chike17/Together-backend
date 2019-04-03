@@ -11,4 +11,4 @@ const eventSchema = new mongoose.Schema({
   guests: []
 });
 
-module.exports = mongoose.model('Event', eventSchema, 'Event');
+module.exports = mongoose.model('Event', eventSchema);

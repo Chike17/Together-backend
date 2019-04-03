@@ -7,4 +7,4 @@ const hostSchema = new mongoose.Schema({
   events: []
 });
 
-module.exports = mongoose.model('Host', hostSchema, 'Host');
+module.exports = mongoose.model('Host', hostSchema);

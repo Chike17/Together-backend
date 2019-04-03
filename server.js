@@ -2,6 +2,9 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require ('cors');
+const hostRoutes = require('./routes/host');
+// const guestRoutes = require('./routes/guest');
+// const eventRoutes = require('./routes/event');
 
 // Middleware
 app.use(bodyParser.urlencoded({
@@ -17,10 +20,12 @@ app.get('/', (req, res) => {
   res.send('hello world')
 })
 
+app.use('/host', hostRoutes);
 
-// app.use('/user', userRoutes);
+// app.use('/guest', guestRoutes);
 
-// app.use('/api/tip', tipRoutes);
+// app.use('/event', eventRoutes);
+
 
 app.listen(3000, () => console.log("Listening on port 3000"))
  

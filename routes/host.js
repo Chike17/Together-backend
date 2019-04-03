@@ -6,12 +6,12 @@ const
 
     router.get('/', hostControllers.findAllHosts);
 
-    // router.get('/:id', tipControllers.findHostById);
+    router.get('/:id', hostControllers.findHostById);
 
-    // router.post('/', tipControllers.postHost);
+    router.post('/', hostControllers.postHost);
 
-    // router.delete('/:id', tipControllers.deleteHost);
+    router.delete('/:id', hostControllers.deleteHost);
 
-    // router.put('/:id', tipControllers.updateHost);
+    router.put('/:id', hostControllers.updateHost);
 
 module.exports = router;

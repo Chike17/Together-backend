@@ -13,21 +13,21 @@ db.once('open', ()=>{
     console.log('database is now open');
  });
 
-// let seed =
-//         {host: {firstName: 'some host name', lastName: 'some last name'},
-//          event: {startTime: 'some start time', 
-//                  endTime: 'some end time', 
-//                  title: 'some title',
-//                  description: 'some description', 
-//                  location: 'some location'},
-//          guest: {firstName: 'some guest name',
-//                  lastName: 'some last name', 
-//                  email: 'some email',
-//                  dishes: ['dish 1', 'dish 2', 'dish 3 ']}};
+let seed =
+        {host: {firstName: 'some host name', lastName: 'some last name'},
+         event: {startTime: 'some start time', 
+                 endTime: 'some end time', 
+                 title: 'some title',
+                 description: 'some description', 
+                 location: 'some location'},
+         guest: {firstName: 'some guest name',
+                 lastName: 'some last name', 
+                 email: 'some email',
+                 dishes: ['dish 1', 'dish 2', 'dish 3 ']}};
 
-// let seeds = [seed, seed, seed, seed, seed, seed,
-//              seed,seed, seed, seed, seed, seed,
-//              seed, seed, seed, seed, seed, seed];
+let seeds = [seed, seed, seed, seed, seed, seed,
+             seed,seed, seed, seed, seed, seed,
+             seed, seed, seed, seed, seed, seed];
 
 // Guest.deleteMany({}, (err, guests)=>{
 //     Host.deleteMany();
@@ -58,7 +58,8 @@ db.once('open', ()=>{
 //             event.save((err, newEvent)=>{
 //                 let host = new Host({
 //                     firstName: oneSeed.host.firstName,
-//                     lastName: oneSeed.host.lastName
+//                     lastName: oneSeed.host.lastName,
+//                     password: 'gibberish'
 //                 })
 //                 newEvent.host = host._id;
 //                 console.log('/////////////////////////');
@@ -77,11 +78,11 @@ db.once('open', ()=>{
 //                 console.log('/////////////////////////');
 //                 console.log('/////////////////////////');
 //                 host.events.push(newEvent, newEvent, newEvent, newEvent, newEvent);
+
 //                 host.save();
 //             });
 //         });
 //     }
-    
 // }); 
 
 
@@ -89,7 +90,7 @@ Guest.find({}, (err, guests)=> {
     console.log('/////////////////////////');
     console.log('/////////////////////////');
     console.log('/////////////////////////');
-    console.log('//////////Guests///////////////');
+    console.log('//////////Guests/////////');
     console.log('/////////////////////////');
     console.log('/////////////////////////');
     console.log('/////////////////////////');
@@ -100,7 +101,7 @@ Guest.find({}, (err, guests)=> {
         console.log('/////////////////////////');
         console.log('/////////////////////////');
         console.log('/////////////////////////');
-        console.log('///////////Hosts//////////////');
+        console.log('//////////Hosts//////////');
         console.log('/////////////////////////');
         console.log('/////////////////////////');
         console.log('/////////////////////////');
@@ -111,7 +112,7 @@ Guest.find({}, (err, guests)=> {
             console.log('/////////////////////////');
             console.log('/////////////////////////');
             console.log('/////////////////////////');
-            console.log('//////////Events///////////////');
+            console.log('//////////Events/////////');
             console.log('/////////////////////////');
             console.log('/////////////////////////');
             console.log('/////////////////////////');
@@ -121,6 +122,8 @@ Guest.find({}, (err, guests)=> {
     });
     
 });
+
+
 
 
 

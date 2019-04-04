@@ -14,121 +14,63 @@ db.once('open', ()=>{
  });
 
 let seed =
-        {host: {firstName: 'some host name', lastName: 'some last name'},
-         event: {startTime: 'some start time', 
-                 endTime: 'some end time', 
-                 title: 'some title',
-                 description: 'some description', 
-                 location: 'some location'},
-         guest: {firstName: 'some guest name',
-                 lastName: 'some last name', 
-                 email: 'some email',
-                 dishes: ['dish 1', 'dish 2', 'dish 3 ']}};
+        {
+         host: { firstName: 'some host name', 
+                 lastName: 'some last name',
+                 password:'gibberish' },
+         event: { startTime: 'some start time', 
+                  endTime: 'some end time', 
+                  title: 'some title',
+                  description: 'some description', 
+                  location: 'some location'},
+         guest: { firstName: 'some guest name',
+                  lastName: 'some last name', 
+                  email: 'some email',
+                  dishes: ['dish 1', 'dish 2', 'dish 3']}
+        };
 
 let seeds = [seed, seed, seed, seed, seed, seed,
              seed,seed, seed, seed, seed, seed,
              seed, seed, seed, seed, seed, seed];
 
-// Guest.deleteMany({}, (err, guests)=>{
-//     Host.deleteMany();
-//     Event.deleteMany();
-//     for(let i = 0; i < seeds.length; i++){
-//         let oneSeed = seeds[i];
+Guest.deleteMany({}, (err, guests)=>{
+    Host.deleteMany({});
+    Event.deleteMany({});
+    for(let i = 0; i < seeds.length; i++){
+        let oneSeed = seeds[i];
 
-//         let guest = new Guest ({
-//             firstName: oneSeed.guest.firstName,
-//             lastName: oneSeed.guest.lastName,
-//             email: oneSeed.guest.email,
-//          });
+        let guest = new Guest ({
+            firstName: oneSeed.guest.firstName,
+            lastName: oneSeed.guest.lastName,
+            email: oneSeed.guest.email,
+         });
 
-//         dishes = oneSeed.guest.dishes;
-//         guest.dishes.push(dishes[0], dishes[1], dishes[2]);
+        dishes = oneSeed.guest.dishes;
+        guest.dishes.push(dishes[0], dishes[1], dishes[2]);
         
-//         guest.save((err, newGuest) => {
-//             let event = new Event({
-//                 startTime: oneSeed.event.startTime,
-//                 endTime: oneSeed.event.endTime,
-//                 title: oneSeed.event.title,
-//                 description: oneSeed.event.description,
-//                 location: oneSeed.event.location,
-//             });
+        guest.save((err, newGuest) => {
+            let event = new Event({
+                startTime: oneSeed.event.startTime,
+                endTime: oneSeed.event.endTime,
+                title: oneSeed.event.title,
+                description: oneSeed.event.description,
+                location: oneSeed.event.location,
+            });
 
-//             event.guests.push(newGuest, newGuest, newGuest, newGuest, newGuest);
+            event.guests.push(newGuest, newGuest, newGuest, newGuest, newGuest);
 
-//             event.save((err, newEvent)=>{
-//                 let host = new Host({
-//                     firstName: oneSeed.host.firstName,
-//                     lastName: oneSeed.host.lastName,
-//                     password: 'gibberish'
-//                 })
-//                 newEvent.host = host._id;
-//                 console.log('/////////////////////////');
-//                 console.log('/////////////////////////');
-//                 console.log('/////////////////////////');
-//                 console.log('/////////////////////////');
-//                 console.log('///////////// Event Host Id////////////');
-//                 console.log(newEvent.host);
-//                 console.log(newEvent.host);
-//                 console.log(newEvent.host);
-//                 console.log(newEvent.host);
-//                 console.log(newEvent.host);
-//                 console.log('/////////////////////////');
-//                 console.log('/////////////////////////');
-//                 console.log('/////////////////////////');
-//                 console.log('/////////////////////////');
-//                 console.log('/////////////////////////');
-//                 host.events.push(newEvent, newEvent, newEvent, newEvent, newEvent);
-
-//                 host.save();
-//             });
-//         });
-//     }
-// }); 
-
-
-Guest.find({}, (err, guests)=> {
-    console.log('/////////////////////////');
-    console.log('/////////////////////////');
-    console.log('/////////////////////////');
-    console.log('//////////Guests/////////');
-    console.log('/////////////////////////');
-    console.log('/////////////////////////');
-    console.log('/////////////////////////');
-    console.log('/////////////////////////');
-    console.log(guests);
-
-    Host.find({}, (err, hosts)=> {
-        console.log('/////////////////////////');
-        console.log('/////////////////////////');
-        console.log('/////////////////////////');
-        console.log('//////////Hosts//////////');
-        console.log('/////////////////////////');
-        console.log('/////////////////////////');
-        console.log('/////////////////////////');
-        console.log('/////////////////////////');
-        console.log(hosts);
-
-        Event.find({}, (err, events)=> {
-            console.log('/////////////////////////');
-            console.log('/////////////////////////');
-            console.log('/////////////////////////');
-            console.log('//////////Events/////////');
-            console.log('/////////////////////////');
-            console.log('/////////////////////////');
-            console.log('/////////////////////////');
-            console.log('/////////////////////////');
-            console.log(events);
+            event.save((err, newEvent)=>{
+                let host = new Host({
+                    firstName: oneSeed.host.firstName,
+                    lastName: oneSeed.host.lastName,
+                    password: oneSeed.host.password
+                })
+                newEvent.host = host._id;
+                host.events.push(newEvent, newEvent, newEvent, newEvent, newEvent);
+                host.save();
+            });
         });
-    });
-    
-});
-
-
-
-
-
-
-
-
+    }
+}); 
 
 

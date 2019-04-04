@@ -9,7 +9,7 @@ module.exports = {
     },
     findGuestById: (req, res) => {
         db.Guest.findById(req.params.id, (err, guest) =>{
-            res.json({guest});
+            res.json(guest);
         }); 
     },
     postGuest: (req, res) => {

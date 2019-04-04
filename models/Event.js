@@ -1,6 +1,13 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const guestSchema = new mongoose.Schema({
+    firstName: String,
+    lastName: String,
+    email: String,
+    dishes: [],
+  });
+
 const eventSchema = new mongoose.Schema({
   startTime: String,
   endTime: String,
@@ -8,7 +15,7 @@ const eventSchema = new mongoose.Schema({
   description: String,
   location: String,
   host: {type: mongoose.Schema.Types.ObjectId, ref: 'Host'}, 
-  guests: []
+  guests: [guestSchema]
 });
 
 module.exports = mongoose.model('Event', eventSchema);

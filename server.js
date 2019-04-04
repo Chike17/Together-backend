@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require ('cors');
 const hostRoutes = require('./routes/host');
-// const guestRoutes = require('./routes/guest');
+const guestRoutes = require('./routes/guest');
 // const eventRoutes = require('./routes/event');
 
 // Middleware
@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 
 app.use('/host', hostRoutes);
 
-// app.use('/guest', guestRoutes);
+app.use('/guest', guestRoutes);
 
 // app.use('/event', eventRoutes);
 

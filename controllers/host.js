@@ -1,5 +1,6 @@
 db = require('../models');
 jwt = require('jsonwebtoken');
+bcrypt = require('bcrypt');
 
 module.exports = {
     findAllHosts: (req, res) =>{
@@ -13,13 +14,22 @@ module.exports = {
           }); 
     },
     postHost: (req, res) => {
-        let host = new db.Host({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName
-        });
-        host.save((err, newHost) => {
-          res.json(newHost);
-        })
+        bcrypt.hash(req.body.password, 10, (err, hash) =>{
+            let host = new db.Host({
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                email: req.body.email,
+                password: hash
+            });
+            host.save((err, newHost) => {
+            let firstName = req.body.firstName;
+            let lastName = req.body.lastName;
+              res.json({
+                        name: `${firstName}  ${lastName}`,
+                        message: 'new user created!!!!!'
+                       });
+            }); 
+        }); 
     },
     deleteHost: (req, res) => {
       db.Host.findByIdAndRemove(req.params.id, (err, deletedHost) => {

@@ -4,12 +4,6 @@ bcrypt = require('bcrypt');
 
 module.exports = {
     signUp:(req, res) =>{
-      console.log(req.body);
-      console.log(req.body);
-      console.log(req.body);
-      console.log(req.body);
-      console.log(req.body);
-      console.log(req.body);
       db.Host.find({
         email: req.body.email
     })
@@ -76,16 +70,16 @@ module.exports = {
                       });
                   }
                   if (match) {
-                    let email = {email: req.body.email};
+                    let hostInfo = {email: req.body.email};
                       jwt.sign(
-                          email,
+                          hostInfo,
                           "slauson", {
                               expiresIn: "1h"
                           },
                           (err, signedJwt) => {
                               res.status(200).json({
                                   message: 'Auth successful',
-                                  email: email,
+                                  hostInfo,
                                   signedJwt
                               })
                           });
@@ -142,8 +136,3 @@ module.exports = {
         })
     }
 } 
-
-
-
-
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXNzYWdlIjoiWW91IGxvZ2dlZCBpbiBodWZiZmlmaSBnbmdqaWZnbmpmaSAhISEiLCJpYXQiOjE1NTQ0OTE2OTksImV4cCI6MTU1NDQ5NTI5OX0.ufojXMpbvhqGFbRN9ZAbswMW4YRVKdkwb7MPGTRjfSs

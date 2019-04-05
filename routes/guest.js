@@ -1,17 +1,18 @@
 const
+    verifyToken = require('../utils/utils');
     express = require('express');
     router = express.Router(),
     guestControllers = require('../controllers/guest');
-    jwt = require('jsonwebtoken');
 
-    router.get('/', guestControllers.findAllGuests);
+    
+    router.get('/', verifyToken, guestControllers.findAllGuests);
 
-    router.get('/:id', guestControllers.findGuestById);
+    router.get('/:id', verifyToken, guestControllers.findGuestById);
 
-    router.post('/', guestControllers.postGuest);
+    router.post('/', verifyToken, guestControllers.postGuest);
 
-    router.delete('/:id', guestControllers.deleteGuest);
+    router.delete('/:id', verifyToken, guestControllers.deleteGuest);
 
-    router.put('/:id', guestControllers.updateGuest);
+    router.put('/:id', verifyToken, guestControllers.updateGuest);
 
 module.exports = router;

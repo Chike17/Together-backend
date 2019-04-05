@@ -1,5 +1,4 @@
 db = require('../models');
-jwt = require('jsonwebtoken');
 
 module.exports = {
     findAllEvents: (req, res) =>{
@@ -41,8 +40,8 @@ module.exports = {
     },
     updateEvent: (req, res) => {
         db.Event.findById(req.params.id, (err, foundEvent) => {
-            req.body.startTime  ===  undefined ?  console.log('no start time') : foundEvent.startTime = req.body.startTime;
-            req.body.endTime  ===  undefined ? console.log('no end time'): foundEvent.endTime = req.body.endTime;
+            req.body.startTime  ===  undefined  ?  console.log('no start time') : foundEvent.startTime = req.body.startTime;
+            req.body.endTime  ===  undefined  ? console.log('no end time'): foundEvent.endTime = req.body.endTime;
             req.body.title ===  undefined ? console.log('no title') : foundEvent.title = req.body.title;
             req.body.description  ===  undefined ? console.log('no description') : foundEvent.description = req.body.description;
             req.body.guestData  ===  undefined ? console.log('no guest data'): foundEvent.guests = req.body.guestData;

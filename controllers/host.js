@@ -4,56 +4,57 @@ bcrypt = require('bcrypt');
 
 module.exports = {
     signUp:(req, res) =>{
+      console.log(req.body);
+      console.log(req.body);
+      console.log(req.body);
+      console.log(req.body);
+      console.log(req.body);
+      console.log(req.body);
       db.Host.find({
         email: req.body.email
     })
-    .exec()
-    .then(users => {
-        if (users.length) {
+      .exec()
+      .then(hosts => {
+         if (hosts.length) {
             res.status(409).json({
-                message: "email already exists"
+                message: "email already exists",
+                hosts: hosts
             });
         } else {
-            bcrypt.hash(req.body.password, 10, (err, hash) => {
-                if (err) {
-                    res.status(200).json({
-                        error: err
-                    })
-                } else {
-                    let host = new db.Host({
-                        firstName: req.body.firstName,
-                        lastName: req.body.lastName,
-                        email: req.body.email,
-                        password: hash
-                    });
-                    host.save((err) =>{
-                        let message = {
-                                       message: `You signed up ${req.body.firstName} ${req.body.lastName} !!!`
-                                      }
-                        jwt.sign(
-                            message,
-                            "slauson", {
-                                expiresIn: "1h"
-                            },
-                            (err, signedJwt) => {
-                              if (err){
-                                res.json(err)
-                              } else {
-                                  res.status(200).json({
-                                    message: message,
-                                    signedJwt
-                                  });
-                              }
-                            });
-                    });
+            bcrypt.hash(req.body.password, 10)
+            .then(hash => {
+              let host = new db.Host({
+                  firstName: req.body.firstName,
+                  lastName: req.body.lastName,
+                  email: req.body.email,
+                  password: hash
+              });
+              host.save((err) =>{
+                let message = {
+                  message: `You signed up ${req.body.firstName} ${req.body.lastName} !!!`
                 }
+                jwt.sign(
+                  message,
+                  "slauson", {
+                  expiresIn: "1h"
+                  },
+                  (err, signedJwt) => {
+                  if (err){
+                    res.json(err)
+                  } else {
+                    res.status(200).json({
+                    message: message,
+                    signedJwt
+                  });
+                  }
+                });
+              });
+            }).catch(err => {
+              if (err) {
+                res.json(err);
+              }
             })
         }
-    }).catch(err => {
-      console.log(err);
-        res.status(500).json({
-            err
-        });
       });
     },
     login: (req, res) => {
@@ -71,7 +72,7 @@ module.exports = {
               bcrypt.compare(req.body.password, hosts[0].password, (err, match) => {
                   if (err) {
                       return res.status(500).json({
-                          err
+                          err,
                       });
                   }
                   if (match) {
@@ -98,7 +99,7 @@ module.exports = {
           .catch(err => {
               console.log(err);
               res.status(500).json({
-                  err
+                  err,
               });
           });
     },
@@ -125,7 +126,7 @@ module.exports = {
             let lastName = req.body.lastName;
               res.json({
                         name: `${firstName}  ${lastName}`,
-                        message: 'new user created!!!!!'
+                        message: 'new host created!!!!!'
                        });
             }); 
         }); 
@@ -141,3 +142,8 @@ module.exports = {
         })
     }
 } 
+
+
+
+
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXNzYWdlIjoiWW91IGxvZ2dlZCBpbiBodWZiZmlmaSBnbmdqaWZnbmpmaSAhISEiLCJpYXQiOjE1NTQ0OTE2OTksImV4cCI6MTU1NDQ5NTI5OX0.ufojXMpbvhqGFbRN9ZAbswMW4YRVKdkwb7MPGTRjfSs

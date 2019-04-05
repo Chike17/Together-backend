@@ -1,16 +1,17 @@
 const
+    verifyToken = require('../utils/utils');
     express = require('express');
     router = express.Router(),
     eventControllers = require('../controllers/event');
 
-    router.get('/', eventControllers.findAllEvents);
+    router.get('/', verifyToken, eventControllers.findAllEvents);
 
-    router.get('/:id', eventControllers.findEventById);
+    router.get('/:id', verifyToken, eventControllers.findEventById);
 
-    router.post('/:hostId', eventControllers.postEvent);
+    router.post('/:hostId', verifyToken, eventControllers.postEvent);
 
-    router.delete('/:id', eventControllers.deleteEvent);
+    router.delete('/:id', verifyToken, eventControllers.deleteEvent);
 
-    router.put('/:id', eventControllers.updateEvent);
+    router.put('/:id', verifyToken, eventControllers.updateEvent);
 
 module.exports = router;

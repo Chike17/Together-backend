@@ -37,15 +37,13 @@ module.exports = {
       })
     },
     updateEvent: (req, res) => {
-        let eventUpdate = {};
-
-
         db.Event.findById(req.params.id, (err, foundEvent) => {
-            req.body.startTime  ===  undefined ?  eventUpdate : foundEvent.startTime = req.body.startTime;
-            req.body.endTime  ===  undefined ? eventUpdate: foundEvent.endTime = req.body.endTime;
-            req.body.title ===  undefined ? eventUpdate : foundEvent.title = req.body.title;
-            req.body.description  ===  undefined ? eventUpdate: foundEvent.description = req.body.description;
-            req.body.guestData  ===  undefined ? eventUpdate: foundEvent.guests = req.body.guestData;
+            req.body.startTime  ===  undefined ?  console.log('no start time') : foundEvent.startTime = req.body.startTime;
+            req.body.endTime  ===  undefined ? console.log('no end time'): foundEvent.endTime = req.body.endTime;
+            req.body.title ===  undefined ? console.log('no title') : foundEvent.title = req.body.title;
+            req.body.description  ===  undefined ? console.log('no description') : foundEvent.description = req.body.description;
+            req.body.guestData  ===  undefined ? console.log('no guest data'): foundEvent.guests = req.body.guestData;
+            req.body.location  ===  undefined ?  console.log('no location') : foundEvent.location = req.body.location;
             foundEvent.save((err, newFoundEvent)=>{
                 res.json(newFoundEvent);
             });

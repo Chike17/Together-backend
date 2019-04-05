@@ -33,8 +33,11 @@ module.exports = {
     },
     deleteEvent: (req, res) => {
       db.Event.findByIdAndRemove(req.params.id, (err, deletedEvent) => {
+          if (err) {
+            res.json(err);
+          }
         res.json(deletedEvent);
-      })
+      });
     },
     updateEvent: (req, res) => {
         db.Event.findById(req.params.id, (err, foundEvent) => {

@@ -14,4 +14,8 @@ const
 
     router.put('/:id', hostControllers.updateHost);
 
+    router.post('/signup', hostControllers.signUp);
+
+    router.post('/login', hostControllers.login);
+
 module.exports = router;

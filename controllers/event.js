@@ -20,8 +20,8 @@ module.exports = {
             title: req.body.title,
             description: req.body.description,
             location: req.body.location,
-            host: req.params.hostId, 
-            guests: guestData
+            guests: guestData,
+            host: req.params.hostId
         });
         event.save((err, newEvent) => {
             if (err) {
@@ -29,7 +29,7 @@ module.exports = {
             } else {
                 res.json(newEvent);
             }
-        });
+        });  
     },
     deleteEvent: (req, res) => {
       db.Event.findByIdAndRemove(req.params.id, (err, deletedEvent) => {
@@ -37,12 +37,18 @@ module.exports = {
       })
     },
     updateEvent: (req, res) => {
-        let dish1 = req.body.dish1;
-        let dish2 = req.body.dish2;
-        let dish3 = req.body.dish3;
-        req.body.dishes = [dish1, dish2, dish3];
-        db.Event.findByIdAndUpdate(req.params.id, req.body, (err, updatedEvent) => {
-            res.json(updatedEvent);
-        })
+        let eventUpdate = {};
+
+
+        db.Event.findById(req.params.id, (err, foundEvent) => {
+            req.body.startTime  ===  undefined ?  eventUpdate : foundEvent.startTime = req.body.startTime;
+            req.body.endTime  ===  undefined ? eventUpdate: foundEvent.endTime = req.body.endTime;
+            req.body.title ===  undefined ? eventUpdate : foundEvent.title = req.body.title;
+            req.body.description  ===  undefined ? eventUpdate: foundEvent.description = req.body.description;
+            req.body.guestData  ===  undefined ? eventUpdate: foundEvent.guests = req.body.guestData;
+            foundEvent.save((err, newFoundEvent)=>{
+                res.json(newFoundEvent);
+            });
+        });
     }
 } 

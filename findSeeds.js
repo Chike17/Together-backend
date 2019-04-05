@@ -12,7 +12,6 @@ db.once('open', ()=>{
     console.log('database is now open');
  });
 
-
 Guest.find({}, (err, guests)=> {
     console.log('/////////////////////////');
     console.log('/////////////////////////');

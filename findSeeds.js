@@ -48,10 +48,3 @@ Guest.find({}, (err, guests)=> {
     });
     
 });
-
-
-
-
-
-
-

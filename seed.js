@@ -39,15 +39,13 @@ Guest.deleteMany({}, (err, guests)=>{
         Event.deleteMany({}, (err, events)=> {
             for(let i = 0; i < seeds.length; i++){
                 let oneSeed = seeds[i];
-        
                 let guest = new Guest ({
                     firstName: oneSeed.guest.firstName,
                     lastName: oneSeed.guest.lastName,
                     email: oneSeed.guest.email,
                  });
                 dishes = oneSeed.guest.dishes;
-                guest.dishes.push(dishes[0], dishes[1], dishes[2]);
-                
+                guest.dishes = dishes;
                 guest.save((err, newGuest) => {
                     let event = new Event({
                         startTime: oneSeed.event.startTime,
@@ -64,8 +62,7 @@ Guest.deleteMany({}, (err, guests)=>{
                             lastName: oneSeed.host.lastName,
                             email: oneSeed.host.email,
                             password: oneSeed.host.password
-                        })
-                        
+                        });
                         newEvent.host = host._id;
                         host.events.push(newEvent, newEvent, newEvent, newEvent, newEvent);
                         host.save();

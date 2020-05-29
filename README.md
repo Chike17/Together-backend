@@ -3,9 +3,10 @@
     BASE URL
     http://localhost:3000
 
+
     *** HOSTS ***
 
-    POST a new host
+    POST a new host to sign up
     /host/signup
     firstName: string
     lastName: string
@@ -24,7 +25,7 @@
     /host/:id
 
     POST one host
-
+    /host
     firstName: string
     lastName: string
     email: string
@@ -33,14 +34,6 @@
 
     DELETE one host
     /host/:id
-
-    PUT one host
-    /host/:id
-    firstName: string
-    lastName: string
-    email: string,
-    password: string
-
 
 
     *** EVENTS ***

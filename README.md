@@ -72,10 +72,10 @@
     endTime: string
     title: string
     description: string
-    guestData: firstName: string,
-                lastName: string,
-                email: string,
-                dishes: [string]
+    guestData: firstName: string
+               lastName: string
+               email: string
+               dishes: [string]
     location: string
 
 
@@ -90,8 +90,8 @@
 
     POST one guest
     /guest
-    {firstName: string,
-    lastName: string,
+    firstName: string
+    lastName: string
     email: string
     dish1: string
     dish2: string

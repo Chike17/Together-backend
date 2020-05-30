@@ -1,8 +1,15 @@
+    1. Issue the command npm install at the root of the directory.
+    2. Issue the command node server.js at the root of the directory.
+
     Endpoints
 
     BASE URL
     http://localhost:3000
 
+    All routes besides the sign up route
+    require a javascript web token.
+
+    The jwt is returned upon a successful sign up
 
     *** HOSTS ***
 
